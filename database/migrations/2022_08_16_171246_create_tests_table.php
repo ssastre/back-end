@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('num_ing')->default(0);
             $table->boolean('resultado');
+            $table->string('fecha', 11);
         });
     }
 

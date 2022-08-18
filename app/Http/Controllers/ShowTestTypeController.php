@@ -32,10 +32,16 @@ class ShowTestTypeController extends Controller
             $tipo_id = $rows->tipo_id;
             $path_img_testeo = $rows->path_img_testeo;
             $num_corr = $rows->num_corr;
-            $result['Datos del id: '][] = array('id' => $id, 'tipo_id' => $tipo_id, 'path' => $path_img_testeo, 'num_corr' => $num_corr); 
+            //$result['Datos del id: '][] = array('id' => $id, 'tipo_id' => $tipo_id, 'path' => $path_img_testeo, 'num_corr' => $num_corr); 
+            $result[] = array("id" => $id, "tipo_id" => $tipo_id, "path" => $path_img_testeo, "num_corr" => $num_corr); 
+
         }
         //return json_encode($result);
-        $result_json = json_encode($result);
+        //$result_json2 = str_replace('', '', $result_json);
+  
+        //$result_json = json_encode($result);
+        return response()->json($result, 201);
+        /*
         return response()->json([
             'Datos del Test' => [
                 'Tipo id Solicitado' => $tipo_id,
@@ -43,9 +49,8 @@ class ShowTestTypeController extends Controller
                 'resultado' => $result_json
             ]
         ], 201);
-
-
-    
+        */
+  
       } 
 
 
