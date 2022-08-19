@@ -21,39 +21,44 @@ class ShowTestTypeController extends Controller
                 ]
             ], 201);
       } elseif ($type === 'allRecords') {
-        $tipo_id = $request->input('tipo_id');
-        //Seleccionamos todos los registros de image que tengan el tipo_id indicado
+        function UniqueRandomNumbersWithinRange($min, $max, $quantity) {
+            $numbers = range($min, $max);
+            shuffle($numbers);
+            return array_slice($numbers, 0, $quantity);
+        }
+        $cantidad = $request->input('cantidad');
+
+       //Seleccionamos todos los registros de image que tengan el tipo_id indicado
         $images = DB::table('images')
-            ->where('tipo_id', '=', $tipo_id)
+            ->where('tipo_id', '=', 1)
             ->get();
+
+        // selecciono cantidad de ids de imagen 
+        //$totalids=$imange->count() lengt;
+        $totalids=5;
+ 
+
+        $randomIds= UniqueRandomNumbersWithinRange(1,$totalids,$cantidad) ;
+        //print_r($randomIds);
+        $i=0;
+
         foreach ($images as $rows)
         {
             $id = $rows->id;
             $tipo_id = $rows->tipo_id;
             $path_img_testeo = $rows->path_img_testeo;
             $num_corr = $rows->num_corr;
+            $i=$i+1;
             //$result['Datos del id: '][] = array('id' => $id, 'tipo_id' => $tipo_id, 'path' => $path_img_testeo, 'num_corr' => $num_corr); 
-            $result[] = array("id" => $id, "tipo_id" => $tipo_id, "path" => $path_img_testeo, "num_corr" => $num_corr); 
+            if (in_array( $id, $randomIds ) ){
+                $result[] = array("id" => $id,"path" => $path_img_testeo, "num_corr" => $num_corr); 
+            }
 
         }
-        //return json_encode($result);
-        //$result_json2 = str_replace('', '', $result_json);
-  
-        //$result_json = json_encode($result);
+        
         return response()->json($result, 201);
-        /*
-        return response()->json([
-            'Datos del Test' => [
-                'Tipo id Solicitado' => $tipo_id,
-                'Cantidad de registros' => $images->count(),              
-                'resultado' => $result_json
-            ]
-        ], 201);
-        */
   
       } 
-
-
-        
+  
     }
 }
