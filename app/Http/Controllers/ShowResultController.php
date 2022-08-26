@@ -15,6 +15,7 @@ class ShowResultController extends Controller
 
         $results = DB::table('tests')
         ->where('usuario_id', '=', 1)
+        ->where('fecha', '=', $fecha)
         ->get();
 
         foreach ($results as $rows)
@@ -24,7 +25,7 @@ class ShowResultController extends Controller
             $num_ing = $rows->num_ing;
             $resultado = $rows->resultado;
             //$result['Datos del id: '][] = array('id' => $id, 'tipo_id' => $tipo_id, 'path' => $path_img_testeo, 'num_corr' => $num_corr); 
-            $result[] = array("id" => $id, "usuario_id" => $usuario_id, "num_ing" => $num_ing, "resultado" => $resultado); 
+            $result[] = array("id" => $id, "usuario_id" => $usuario_id, "num_ing" => $num_ing, "resultado" => $resultado, "fecha" => $fecha); 
 
         }
 

@@ -12,6 +12,7 @@ class EvalTestController extends Controller
         $usuario = $request->input('usuario');
         $num_ing = $request->input('num_ing');
         $image_id = $request->input('imagen_id');
+        $fecha = $request->input('fecha');
         $num_ing_int  = (int) $num_ing ;
 
         //Buscar el num_corr para comparar con el num_ing
@@ -36,6 +37,7 @@ class EvalTestController extends Controller
         $test->num_ing = $num_ing_int;
         $test->image_id = $image_id;
         $test->resultado = $resultado;
+        $test->fecha = $fecha;
         $test->save();
 
 
@@ -46,6 +48,7 @@ class EvalTestController extends Controller
                 'num_ing' => $num_ing,
                 'num_corr' => $num_corr,
                 'resultado' => $resultado,
+                'fecha' => $fecha
             ]
         ], 201);
     }

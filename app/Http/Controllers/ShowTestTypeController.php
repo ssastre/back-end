@@ -35,7 +35,7 @@ class ShowTestTypeController extends Controller
 
         // selecciono cantidad de ids de imagen 
         //$totalids=$imange->count() lengt;
-        $totalids=5;
+        $totalids=6;
  
 
         $randomIds= UniqueRandomNumbersWithinRange(1,$totalids,$cantidad) ;
@@ -48,10 +48,11 @@ class ShowTestTypeController extends Controller
             $tipo_id = $rows->tipo_id;
             $path_img_testeo = $rows->path_img_testeo;
             $num_corr = $rows->num_corr;
+            $img_testeo = $rows->img_testeo;
             $i=$i+1;
             //$result['Datos del id: '][] = array('id' => $id, 'tipo_id' => $tipo_id, 'path' => $path_img_testeo, 'num_corr' => $num_corr); 
             if (in_array( $id, $randomIds ) ){
-                $result[] = array("id" => $id,"path" => $path_img_testeo, "num_corr" => $num_corr); 
+                $result[] = array("id" => $id,"path" => $path_img_testeo, "num_corr" => $num_corr, "img_testeo" => $img_testeo); 
             }
 
         }
